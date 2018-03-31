@@ -12,10 +12,8 @@ import {
   Form,
   FormGroup,
   FormTitle,
-  Input,
   Label,
   MoneyInput,
-  NumberInput,
   TextInput,
   Submit
 } from '../components/form'
