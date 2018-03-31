@@ -1,24 +1,26 @@
 import styled, { css } from 'styled-components'
-import theme from './theme'
+import { colors, font } from './theme'
 
 const Button = styled.button`
   border-radius: 3px;
   padding: 0.25em 1em;
   margin: 0 1em;
   background: transparent;
-  color: ${theme.colors.primary};
-  border: 2px solid ${theme.colors.primary};
+  font-size: ${font.size};
+  color: ${colors.primary};
+  border: 2px solid ${colors.primary};
+  cursor: pointer;
 
   ${({ primary }) => primary && css`
-    background: ${theme.colors.primary};
+    background: ${colors.primary};
     color: white;
   `}
 
   ${({ secondary }) => secondary && css`
-  background: ${theme.colors.secondary};
-  border: 2px solid ${theme.colors.secondary};  
-  color: white;
-`}
+    background: ${colors.secondary};
+    border: 2px solid ${colors.secondary};  
+    color: white;
+  `}
 `
 
 export default Button
