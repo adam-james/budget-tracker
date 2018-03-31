@@ -1,8 +1,10 @@
 export const colors = {
   primary: '#1142AA',
-  secondary: '#FFA900'
+  secondary: '#FFA900',
+  border: '#CDCDCD'
 }
 
 export const font = {
-  size: '16px'
+  size: '16px',
+  family: '"Helvetica Neue", sans-serif;'
 }

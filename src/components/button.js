@@ -6,6 +6,7 @@ const Button = styled.button`
   padding: 0.25em 1em;
   margin: 0 1em;
   background: transparent;
+  font-family: ${font.family};
   font-size: ${font.size};
   color: ${colors.primary};
   border: 2px solid ${colors.primary};
