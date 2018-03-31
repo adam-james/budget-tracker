@@ -54,7 +54,6 @@ export const Form = styled.form`
 export const FormTitle = styled.h3`
   font-family: ${font.family};
   font-size: ${font.size.l};
-  margin: 0.25em 0;
   font-weight: 400;
 `
 
