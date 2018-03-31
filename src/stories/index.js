@@ -8,12 +8,16 @@ import { Welcome } from '@storybook/react/demo';
 
 import Button from '../components/button'
 import {
+  DateInput,
+  Form,
   FormGroup,
+  FormTitle,
   Input,
   Label,
   MoneyInput,
   NumberInput,
-  TextInput
+  TextInput,
+  Submit
 } from '../components/form'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -29,26 +33,34 @@ storiesOf('Button', module)
     <Button secondary>I'm a secondary button</Button>
   ))
 
+const formSubmit = action('form-submit')
+
 storiesOf('Form', module)
-  .add('Text Input', () => (
-    <Input type="text" />
-  ))
-  .add('Number Input', () => (
-    <Input type="number" />
-  ))
-  .add('Label', () => (
-    <Label>I'm a label</Label>
-  ))
-  .add('Input with Label', () => (
-    <div>
+  .add('Form', () => (
+    <Form onSubmit={(e) => {
+        e.preventDefault()
+        formSubmit(e)
+      }} 
+    >
+      <FormTitle>Add Expense</FormTitle>
+
       <FormGroup>
         <Label>Description</Label>
-        <TextInput />
+        <TextInput onChange={action('description change')} />
       </FormGroup>
 
       <FormGroup>
         <Label>Amount</Label>
-        <MoneyInput />
+        <MoneyInput onChange={action('money change')} />
       </FormGroup>
-    </div>
+
+      <FormGroup>
+        <Label>Date</Label>
+        <DateInput onChange={action('date change')} />
+      </FormGroup>
+
+      <FormGroup>
+        <Submit />
+      </FormGroup>
+    </Form>
   ))

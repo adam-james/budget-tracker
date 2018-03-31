@@ -7,7 +7,7 @@ const Button = styled.button`
   margin: 0 1em;
   background: transparent;
   font-family: ${font.family};
-  font-size: ${font.size};
+  font-size: ${font.size.m};
   color: ${colors.primary};
   border: 2px solid ${colors.primary};
   cursor: pointer;
