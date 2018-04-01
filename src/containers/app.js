@@ -10,7 +10,7 @@ const App = ({ expenses }) => (
   <Container>
     <ExpenseForm onSubmit={(e) => console.log(e)} />
     <Spacer />
-    <ExpenseTable expenses={expenses} />
+    <ExpenseTable expenses={expenses} onSort={(sortCol) => console.log(sortCol)} />
   </Container>
 )
 

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { get, Map, List } from 'immutable'
 
 import ExpenseTable from './expense-table'
-import { TableBodyRow, TableCell } from './table'
+import { TableBodyRow, TableCell, TableSortCell } from './table'
 
 describe('ExpenseTable', () => {
   const coffee = Map({
@@ -104,5 +104,26 @@ describe('ExpenseTable', () => {
     expect(coffeeCells.at(0).props().children).toBe(get(coffee, 'date'))
     expect(coffeeCells.at(1).props().children).toBe(get(coffee, 'description'))
     expect(coffeeCells.at(2).props().children).toBe(get(coffee, 'amount'))
+  })
+
+  it('handles sort', () => {
+    const handleSort = jest.fn()
+    const wrapper = shallow(
+      <ExpenseTable
+        expenses={expenses}
+        onSort={handleSort}
+      />
+    )
+    const sortCells = wrapper.find(TableSortCell)
+    expect(sortCells.length).toBe(3)
+
+    sortCells.at(0).simulate('click')
+    sortCells.at(1).simulate('click')
+    sortCells.at(2).simulate('click')
+
+    expect(handleSort.mock.calls.length).toBe(3)
+    expect(handleSort.mock.calls[0][0]).toBe('date')
+    expect(handleSort.mock.calls[1][0]).toBe('description')
+    expect(handleSort.mock.calls[2][0]).toBe('amount')
   })
 })

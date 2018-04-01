@@ -1,5 +1,6 @@
 import React from 'react'
-import { get } from 'immutable'
+import PropTypes from 'prop-types'
+import { get, List } from 'immutable'
 
 import {
   Table,
@@ -11,7 +12,7 @@ import {
   TableCell
 } from './table'
 
-export default function({ sortKey, sortOrder, expenses }) {
+const ExpenseTable = ({ expenses, onSort, sortKey, sortOrder }) => {
   let sorted
 
   if (sortKey && sortOrder) {
@@ -21,7 +22,7 @@ export default function({ sortKey, sortOrder, expenses }) {
   }
 
   const tableRows = getTableRows(sorted)
-  const sortCells = getSortCells(sortKey, sortOrder)
+  const sortCells = getSortCells(sortKey, sortOrder, onSort)
 
   return (
     <Table>
@@ -37,14 +38,26 @@ export default function({ sortKey, sortOrder, expenses }) {
   )
 }
 
-function getSortCells(sortKey, sortOrder) {
+ExpenseTable.propTypes = {
+  expenses: PropTypes.instanceOf(List).isRequired,
+  sortKey: PropTypes.string,
+  sortOrder: PropTypes.string
+}
+
+export default ExpenseTable
+
+function getSortCells(sortKey, sortOrder, onSort) {
   const columns = ['Date', 'Description', 'Amount']
+  const handleClick = (column) => (e) => {
+    onSort(column.toLowerCase())
+  }
 
   return columns.map(column => (
     <TableSortCell
       key={column}
       asc={sortKey === column.toLowerCase() && sortOrder === 'asc'}
       desc={sortKey === column.toLowerCase() && sortOrder === 'desc'}
+      onClick={handleClick(column)}
     >
       { column }
     </TableSortCell>
