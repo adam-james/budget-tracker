@@ -28,7 +28,7 @@ const getSortInstuctions = (oldInstructions, newSortKey) => {
   })
 }
 
-const expenseTable = (state = new SortInstructions(), action) => {
+export const expenseTable = (state = new SortInstructions(), action) => {
   switch (action.type) {
     case SORT_EXPENSE_TABLE:
       return getSortInstuctions(state, action.sortKey)
