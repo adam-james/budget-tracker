@@ -18,12 +18,14 @@ import {
   Submit
 } from '../components/form'
 import {
+  Arrow,
   Table,
   TableBody,
   TableBodyRow,
   TableCell,
   TableHead,
-  TableHeadRow
+  TableHeadRow,
+  TableSortCell
 } from '../components/table'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -77,9 +79,9 @@ storiesOf('Table', module)
     <Table>
       <TableHead>
         <TableHeadRow>
-          <TableCell>Date</TableCell>
-          <TableCell>Description</TableCell>
-          <TableCell>Amount</TableCell> 
+          <TableSortCell asc>Date</TableSortCell>
+          <TableSortCell desc>Description</TableSortCell>
+          <TableSortCell>Amount</TableSortCell> 
         </TableHeadRow>
       </TableHead>
       <TableBody>
