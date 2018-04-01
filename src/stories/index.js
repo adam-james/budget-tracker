@@ -17,6 +17,14 @@ import {
   TextInput,
   Submit
 } from '../components/form'
+import {
+  Table,
+  TableBody,
+  TableBodyRow,
+  TableCell,
+  TableHead,
+  TableHeadRow
+} from '../components/table'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -61,4 +69,40 @@ storiesOf('Form', module)
         <Submit />
       </FormGroup>
     </Form>
+  ))
+
+
+storiesOf('Table', module)
+  .add('Table', () => (
+    <Table>
+      <TableHead>
+        <TableHeadRow>
+          <TableCell>Date</TableCell>
+          <TableCell>Description</TableCell>
+          <TableCell>Amount</TableCell> 
+        </TableHeadRow>
+      </TableHead>
+      <TableBody>
+        <TableBodyRow>
+          <TableCell>03/31/2018</TableCell>
+          <TableCell>Coffee</TableCell>
+          <TableCell>$2.25</TableCell> 
+        </TableBodyRow>
+        <TableBodyRow>
+          <TableCell>04/01/2018</TableCell>
+          <TableCell>Rent</TableCell>
+          <TableCell>$1,500.00</TableCell> 
+        </TableBodyRow>
+        <TableBodyRow>
+          <TableCell>04/02/2018</TableCell>
+          <TableCell>Electric</TableCell>
+          <TableCell>$19.00</TableCell> 
+        </TableBodyRow>
+        <TableBodyRow>
+          <TableCell>04/05/2018</TableCell>
+          <TableCell>Tea</TableCell>
+          <TableCell>$2.00</TableCell> 
+        </TableBodyRow>
+      </TableBody>
+    </Table>
   ))
