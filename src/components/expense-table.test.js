@@ -93,7 +93,6 @@ describe('ExpenseTable', () => {
     expect(waterCells.at(1).props().children).toBe(get(water, 'description'))
     expect(waterCells.at(2).props().children).toBe(get(water, 'amount'))
 
-
     const teaRow = tableRows.at(1)
     const teaCells = teaRow.find(TableCell)
     expect(teaCells.at(0).props().children).toBe(get(tea, 'date'))

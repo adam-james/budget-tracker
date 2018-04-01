@@ -39,6 +39,7 @@ export default function({ sortKey, sortOrder, expenses }) {
 
 function getSortCells(sortKey, sortOrder) {
   const columns = ['Date', 'Description', 'Amount']
+
   return columns.map(column => (
     <TableSortCell
       key={column}
