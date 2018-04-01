@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { colors, font } from './theme'
-import { Span } from 'glamorous';
 
 export const TableCell = styled.td`
   padding: 1em 2em;
@@ -20,7 +19,7 @@ const SortText = styled.span`
   cursor: pointer;
 `
 
-export const Arrow = ({ down }) => {
+const Arrow = ({ down }) => {
   return down ? <span> &#x25BC;</span> : <span> &#x25B2;</span>
 }
 
@@ -28,8 +27,8 @@ export const TableSortCell = (props) => (
   <TableCell {...props}>
     <SortText>
       { props.children }
-      { props.desc ? <Arrow down /> : '' }
-      { props.asc ? <Arrow /> : '' }
+      { props.desc ? <Arrow /> : '' }
+      { props.asc ? <Arrow down /> : '' }
     </SortText>
   </TableCell>
 )

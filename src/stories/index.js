@@ -27,6 +27,8 @@ import {
   TableHeadRow,
   TableSortCell
 } from '../components/table'
+import ExpenseTable from '../components/expense-table'
+import { fromJS } from 'immutable'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -73,13 +75,14 @@ storiesOf('Form', module)
     </Form>
   ))
 
-
 storiesOf('Table', module)
   .add('Table', () => (
     <Table>
       <TableHead>
         <TableHeadRow>
-          <TableSortCell asc>Date</TableSortCell>
+          <TableSortCell asc onClick={action('sort-table')}>
+            Date
+          </TableSortCell>
           <TableSortCell desc>Description</TableSortCell>
           <TableSortCell>Amount</TableSortCell> 
         </TableHeadRow>
@@ -108,3 +111,101 @@ storiesOf('Table', module)
       </TableBody>
     </Table>
   ))
+
+storiesOf('ExpenseTable', module)
+  .add('not sorted', () => {
+    const expenses = fromJS([
+      {
+        id: 1,
+        date: '03/31/2018',
+        description: 'Coffee',
+        amount: '$2.25' 
+      },
+      {
+        id: 2,
+        date: '04/01/2018',
+        description: 'Rent',
+        amount: '$1,500.00' 
+      },
+      {
+        id: 3,
+        date: '04/02/2018',
+        description: 'Electric',
+        amount: '$19.00' 
+      },
+      {
+        id: 4,
+        date: '04/05/2018',
+        description: 'Tea',
+        amount: '$2.00' 
+      }
+    ])
+
+    return (
+      <ExpenseTable expenses={expenses} />
+    )
+  })
+  .add('sorted ascending', () => {
+    const expenses = fromJS([
+      {
+        id: 4,
+        date: '04/05/2018',
+        description: 'Tea',
+        amount: '$2.00' 
+      },
+      {
+        id: 2,
+        date: '04/01/2018',
+        description: 'Rent',
+        amount: '$1,500.00' 
+      },
+      {
+        id: 3,
+        date: '04/02/2018',
+        description: 'Electric',
+        amount: '$19.00' 
+      },
+      {
+        id: 1,
+        date: '03/31/2018',
+        description: 'Coffee',
+        amount: '$2.25' 
+      }
+    ])
+
+    return (
+      <ExpenseTable expenses={expenses} sortKey='date' sortOrder='asc' />
+    )
+  })
+  .add('sorted descending', () => {
+    const expenses = fromJS([
+      {
+        id: 4,
+        date: '04/05/2018',
+        description: 'Tea',
+        amount: '$2.00' 
+      },
+      {
+        id: 2,
+        date: '04/01/2018',
+        description: 'Rent',
+        amount: '$1,500.00' 
+      },
+      {
+        id: 3,
+        date: '04/02/2018',
+        description: 'Electric',
+        amount: '$19.00' 
+      },
+      {
+        id: 1,
+        date: '03/31/2018',
+        description: 'Coffee',
+        amount: '$2.25' 
+      }
+    ])
+
+    return (
+      <ExpenseTable expenses={expenses} sortKey='description' sortOrder='desc' />
+    )
+  })
