@@ -1,14 +1,14 @@
 import React from 'react'
-import ExpenseTable from './expense-table'
-import ExpenseForm from './expense-form'
-import { Container, Spacer } from '../components/layout'
+import PropTypes from 'prop-types'
 
-const App = () => (
-  <Container>
-    <ExpenseForm />
-    <Spacer />
-    <ExpenseTable />
-  </Container>
+const App = ({ children }) => (
+  <main>
+    { children }
+  </main>
 )
+
+App.propTypes = {
+  children: PropTypes.node
+}
 
 export default App

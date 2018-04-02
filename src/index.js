@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { fromJS } from 'immutable'
+import { BrowserRouter as Router } from 'react-router-dom'
 import Root from './containers/root'
 import configureStore from './store/configure-store'
 
@@ -34,6 +35,8 @@ const expenses = fromJS([
 const store = configureStore({ expenses })
 
 ReactDOM.render(
-  <Root store={store} />, 
+  <Router>
+    <Root store={store} />
+  </Router>, 
   document.getElementById('root')
 )
