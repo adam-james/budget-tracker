@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Field } from 'redux-form'
 import { colors, font } from './theme'
 import Button from './button'
 
@@ -12,7 +13,7 @@ export const FormError = styled.div`
   margin-top: 1em;
 `
 
-export const Input = styled.input`
+const FormField = styled(Field)`
   font-family: ${font.family};
   font-size: ${font.size.m};
   padding: 0.5em;
@@ -21,23 +22,15 @@ export const Input = styled.input`
   display: block;
 `
 
-export const TextInput = Input.extend.attrs({
+export const TextInput = FormField.extend.attrs({
+  component: 'input',
   type: 'text'
 })`
   width: 95%;
 `
 
-export const NumberInput = Input.extend.attrs({
-  type: 'number'
-})``
-
-export const MoneyInput = Input.extend.attrs({
-  type: 'number',
-  min: '0.00',
-  step: '0.01'
-})``
-
-export const DateInput = Input.extend.attrs({
+export const DateInput = FormField.extend.attrs({
+  component: 'input',
   type: 'date'
 })``
 

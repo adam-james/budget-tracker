@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import expenses from './expenses'
 import expenseTable from './expense-table'
-import expenseForm from './expense-form'
 
 const rootReducer = combineReducers({
   expenses,
-  expenseForm,
-  expenseTable
+  expenseTable,
+  form: formReducer
 })
 
 export default rootReducer
