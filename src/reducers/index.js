@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux'
-import { List, get, Record, set } from 'immutable'
-import { SORT_EXPENSE_TABLE } from '../actions'
+import { List, Map, get, Record, set } from 'immutable'
+import { SORT_EXPENSE_TABLE, CHANGE_EXPENSE_FORM, CREATE_EXPENSE } from '../actions'
 
 const expenses = (state = List(), action) => {
-  return state
+  switch (action.type) {
+    case CREATE_EXPENSE:
+      return state.push(Map(action.expense))
+    default:
+      return state
+  }
 }
 
 const SortInstructions = Record({
@@ -37,8 +42,26 @@ export const expenseTable = (state = new SortInstructions(), action) => {
   }
 }
 
+const ExpenseFormState = Record({
+  date: '',
+  description: '',
+  amount: 0
+})
+
+export const expenseForm = (state = new ExpenseFormState(), action) => {
+  switch (action.type) {
+    case CHANGE_EXPENSE_FORM:
+      return set(state, action.name, action.value)
+    case CREATE_EXPENSE:
+      return new ExpenseFormState()
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   expenses,
+  expenseForm,
   expenseTable
 })
 

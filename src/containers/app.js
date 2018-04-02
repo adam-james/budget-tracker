@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 import ExpenseTable from '../components/expense-table'
 import ExpenseForm from '../components/expense-form'
 import { Container, Spacer } from '../components/layout'
-import { sortExpenseTable } from '../actions'
+import { sortExpenseTable, changeExpenseForm } from '../actions'
 
-const App = ({ expenses, handleSort, sortOrder, sortKey }) => (
+const App = ({ expenses, handleFormChange, handleSort, sortOrder, sortKey }) => (
   <Container>
-    <ExpenseForm onSubmit={(e) => console.log(e)} />
+    <ExpenseForm />
     <Spacer />
     <ExpenseTable
       expenses={expenses}
@@ -22,6 +22,7 @@ const App = ({ expenses, handleSort, sortOrder, sortKey }) => (
 
 App.propTypes = {
   expenses: PropTypes.instanceOf(List).isRequired,
+  handleFormChange: PropTypes.func.isRequired,
   handleSort: PropTypes.func.isRequired,
   sortKey: PropTypes.string.isRequired,
   sortOrder: PropTypes.string.isRequired
@@ -34,7 +35,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSort: (sortKey) => dispatch(sortExpenseTable(sortKey))
+  handleSort: (sortKey) => dispatch(sortExpenseTable(sortKey)),
+  handleFormChange: (event) => dispatch(changeExpenseForm(event))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
