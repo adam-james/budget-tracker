@@ -5,7 +5,10 @@ import { SORT_EXPENSE_TABLE, CHANGE_EXPENSE_FORM, CREATE_EXPENSE } from '../acti
 const expenses = (state = List(), action) => {
   switch (action.type) {
     case CREATE_EXPENSE:
-      return state.push(Map(action.expense))
+      return state.push(Map({
+        id: state.size + 1,        
+        ...action.expense
+      }))
     default:
       return state
   }
@@ -45,7 +48,7 @@ export const expenseTable = (state = new SortInstructions(), action) => {
 const ExpenseFormState = Record({
   date: '',
   description: '',
-  amount: 0
+  amount: ''
 })
 
 export const expenseForm = (state = new ExpenseFormState(), action) => {
