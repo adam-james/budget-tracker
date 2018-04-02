@@ -1,8 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { get, List } from 'immutable'
-import { sortExpenseTable } from '../actions'
 import {
   Table,
   TableHead,
@@ -13,49 +11,50 @@ import {
   TableCell
 } from '../components/table'
 
-export const ExpenseTable = ({ expenses, onSort, sortKey, sortOrder }) => {
-  let sorted
-
-  if (sortKey && sortOrder) {
-    sorted = sortExpenses(expenses, sortKey, sortOrder)
-  } else {
-    sorted = expenses
+export class ExpenseTable extends React.Component {
+  static propTypes = {
+    expenses: PropTypes.instanceOf(List).isRequired,
+    resetTable: PropTypes.func,
+    sortKey: PropTypes.string,
+    sortOrder: PropTypes.string
   }
 
-  const tableRows = getTableRows(sorted)
-  const sortCells = getSortCells(sortKey, sortOrder, onSort)
+  componentWillUnmount() {
+    const { resetTable } = this.props
+    if (resetTable) {
+      resetTable()
+    }
+  }
 
-  return (
-    <Table>
-      <TableHead>
-        <TableHeadRow>
-          { sortCells }
-        </TableHeadRow>
-      </TableHead>
-      <TableBody>
-        { tableRows }
-      </TableBody>
-    </Table>
-  )
+  render() {
+    const { expenses, onSort, sortKey, sortOrder } = this.props
+    let sorted
+
+    if (sortKey && sortOrder) {
+      sorted = sortExpenses(expenses, sortKey, sortOrder)
+    } else {
+      sorted = expenses
+    }
+  
+    const tableRows = getTableRows(sorted)
+    const sortCells = getSortCells(sortKey, sortOrder, onSort)
+  
+    return (
+      <Table>
+        <TableHead>
+          <TableHeadRow>
+            { sortCells }
+          </TableHeadRow>
+        </TableHead>
+        <TableBody>
+          { tableRows }
+        </TableBody>
+      </Table>
+    )
+  }
 }
 
-ExpenseTable.propTypes = {
-  expenses: PropTypes.instanceOf(List).isRequired,
-  sortKey: PropTypes.string,
-  sortOrder: PropTypes.string
-}
-
-const mapStateToProps = (state, ownProps) => ({
-  expenses: state.expenses,
-  sortKey: get(state.expenseTable, 'sortKey'),
-  sortOrder: get(state.expenseTable, 'sortOrder')
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  onSort: (columnName) => dispatch(sortExpenseTable(columnName))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable)
+export default ExpenseTable
 
 function getSortCells(sortKey, sortOrder, onSort) {
   const columns = ['Date', 'Description', 'Amount']

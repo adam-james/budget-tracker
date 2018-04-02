@@ -1,5 +1,8 @@
 import expenseTable from './expense-table'
-import { SORT_EXPENSE_TABLE } from '../actions'
+import {
+  RESET_EXPENSE_TABLE,
+  SORT_EXPENSE_TABLE
+} from '../actions'
 
 describe('expenseTable reducer', () => {
   it('sets default state', () => {
@@ -43,6 +46,22 @@ describe('expenseTable reducer', () => {
     const state2 = expenseTable(state1, action)
     const state3 = expenseTable(state2, action)
     expect(expenseTable(state3, action).toJS()).toEqual({
+      sortKey: '',
+      sortOrder: ''
+    })
+  })
+
+  it('resets state', () => {
+    const state1 = expenseTable(undefined, {})
+    const action = {
+      type: SORT_EXPENSE_TABLE,
+      sortKey: 'date'
+    }
+    const state2 = expenseTable(state1, action)
+    const resetAction = {
+      type: RESET_EXPENSE_TABLE
+    }
+    expect(expenseTable(state2, resetAction).toJS()).toEqual({
       sortKey: '',
       sortOrder: ''
     })

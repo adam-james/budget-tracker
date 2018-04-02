@@ -1,22 +1,17 @@
 import {
   CREATE_EXPENSE,
   createExpense,
-  CHANGE_EXPENSE_FORM,
-  changeExpenseForm,
+  RESET_EXPENSE_TABLE,
+  resetExpenseTable,
   SORT_EXPENSE_TABLE,
   sortExpenseTable,
-  VALIDATE_EXPENSE_FORM,
-  validateExpenseForm
 } from '.'
 
-describe('validateExpenseForm', () => {
+describe('resetExpenseTable', () => {
   it('returns action', () => {
-    const expense = {
-      date: '2018-04-01',
-      description: 'test expense',
-      amount: '2.25'
-    }
-    
+    expect(resetExpenseTable()).toEqual({
+      type: RESET_EXPENSE_TABLE
+    })
   })
 })
 
@@ -30,22 +25,6 @@ describe('createExpense', () => {
     expect(createExpense(expense)).toEqual({
       type: CREATE_EXPENSE,
       expense
-    })
-  })
-})
-
-describe('changeExpenseForm', () => {
-  it('returns action', () => {
-    const event = {
-      target: {
-        name: 'test event',
-        value: 'test value'
-      }
-    }
-    expect(changeExpenseForm(event)).toEqual({
-      type: CHANGE_EXPENSE_FORM,
-      name: event.target.name,
-      value: event.target.value 
     })
   })
 })

@@ -126,4 +126,18 @@ describe('ExpenseTable', () => {
     expect(handleSort.mock.calls[1][0]).toBe('description')
     expect(handleSort.mock.calls[2][0]).toBe('amount')
   })
+
+  it('resets expense table before unmount', () => {
+    const resetTable = jest.fn()
+    const expenses = List()
+    const wrapper = shallow(
+      <ExpenseTable
+        expenses={expenses}
+        resetTable={resetTable}
+      />
+    )
+    expect(resetTable.mock.calls.length).toEqual(0)
+    wrapper.unmount()
+    expect(resetTable.mock.calls.length).toEqual(1)
+  })
 })
