@@ -19,3 +19,10 @@ export const changeExpenseForm = (event) => ({
   name: event.target.name,
   value: event.target.value
 })
+
+export const VALIDATE_EXPENSE_FORM = 'VALIDATE_EXPENSE_FORM'
+
+export const validateExpenseForm = (expense) => ({
+  type: VALIDATE_EXPENSE_FORM,
+  expense
+})

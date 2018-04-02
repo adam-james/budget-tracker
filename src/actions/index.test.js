@@ -5,7 +5,20 @@ import {
   changeExpenseForm,
   SORT_EXPENSE_TABLE,
   sortExpenseTable,
+  VALIDATE_EXPENSE_FORM,
+  validateExpenseForm
 } from '.'
+
+describe('validateExpenseForm', () => {
+  it('returns action', () => {
+    const expense = {
+      date: '2018-04-01',
+      description: 'test expense',
+      amount: '2.25'
+    }
+    
+  })
+})
 
 describe('createExpense', () => {
   it('returns action', () => {

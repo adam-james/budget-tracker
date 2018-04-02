@@ -2,6 +2,16 @@ import styled from 'styled-components'
 import { colors, font } from './theme'
 import Button from './button'
 
+export const FormError = styled.div`
+  font-family: ${font.family};
+  font-size: ${font.size.m};
+  color: ${colors.warning};
+  padding: 0.5em;
+  border: 1px solid ${colors.warning};
+  border-radius: 3px;
+  margin-top: 1em;
+`
+
 export const Input = styled.input`
   font-family: ${font.family};
   font-size: ${font.size.m};

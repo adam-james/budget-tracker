@@ -2,7 +2,8 @@ export const colors = {
   primary: '#1142AA',
   secondary: '#FFA900',
   lightBorder: '#CDCDCD',
-  darkBorder: '#B5B5B5'
+  darkBorder: '#B5B5B5',
+  warning: '#B33A3A'
 }
 
 export const font = {

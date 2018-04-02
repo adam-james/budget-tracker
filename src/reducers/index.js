@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux'
-import { List, Map, get, Record, set } from 'immutable'
-import { SORT_EXPENSE_TABLE, CHANGE_EXPENSE_FORM, CREATE_EXPENSE } from '../actions'
+import { List, Map, get, Record, set, setIn } from 'immutable'
+import {
+  SORT_EXPENSE_TABLE,
+  CHANGE_EXPENSE_FORM,
+  CREATE_EXPENSE,
+  VALIDATE_EXPENSE_FORM
+} from '../actions'
 
 const expenses = (state = List(), action) => {
   switch (action.type) {
@@ -48,15 +53,34 @@ export const expenseTable = (state = new SortInstructions(), action) => {
 const ExpenseFormState = Record({
   date: '',
   description: '',
-  amount: ''
+  amount: '',
+  errors: Map()
 })
+
+const validateExpense = (state, expense) => {
+  let newState = set(state, 'errors', Map())
+
+  if (! get(expense, 'date')) {
+    newState = setIn(newState, ['errors', 'date'], 'Date is required.')
+  }
+
+  if (! get(expense, 'description')) {
+    newState = setIn(newState, ['errors', 'description'], 'Description is required.')
+  }
+
+  if (! get(expense, 'amount')) {
+    newState = setIn(newState, ['errors', 'amount'], 'Amount is required.')
+  }
+
+  return newState
+}
 
 export const expenseForm = (state = new ExpenseFormState(), action) => {
   switch (action.type) {
     case CHANGE_EXPENSE_FORM:
       return set(state, action.name, action.value)
-    case CREATE_EXPENSE:
-      return new ExpenseFormState()
+    case VALIDATE_EXPENSE_FORM:
+      return validateExpense(state, action.expense)
     default:
       return state
   }
