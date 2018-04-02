@@ -13,7 +13,7 @@ import {
   MoneyInput,
   DateInput,
   Submit
-} from './form'
+} from '../components/form'
 
 export const ExpenseForm = ({
   amount,

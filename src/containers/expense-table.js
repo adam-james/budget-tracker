@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { get, List } from 'immutable'
-
+import { sortExpenseTable } from '../actions'
 import {
   Table,
   TableHead,
@@ -10,9 +11,9 @@ import {
   TableBody,
   TableBodyRow,
   TableCell
-} from './table'
+} from '../components/table'
 
-const ExpenseTable = ({ expenses, onSort, sortKey, sortOrder }) => {
+export const ExpenseTable = ({ expenses, onSort, sortKey, sortOrder }) => {
   let sorted
 
   if (sortKey && sortOrder) {
@@ -44,7 +45,17 @@ ExpenseTable.propTypes = {
   sortOrder: PropTypes.string
 }
 
-export default ExpenseTable
+const mapStateToProps = (state, ownProps) => ({
+  expenses: state.expenses,
+  sortKey: get(state.expenseTable, 'sortKey'),
+  sortOrder: get(state.expenseTable, 'sortOrder')
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onSort: (columnName) => dispatch(sortExpenseTable(columnName))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable)
 
 function getSortCells(sortKey, sortOrder, onSort) {
   const columns = ['Date', 'Description', 'Amount']

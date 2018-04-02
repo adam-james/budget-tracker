@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { get, Map, List } from 'immutable'
 
-import ExpenseTable from './expense-table'
-import { TableBodyRow, TableCell, TableSortCell } from './table'
+import { ExpenseTable } from './expense-table'
+import { TableBodyRow, TableCell, TableSortCell } from '../components/table'
 
 describe('ExpenseTable', () => {
   const coffee = Map({
