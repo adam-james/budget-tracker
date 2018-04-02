@@ -1,4 +1,4 @@
-import { expenseTable } from '.'
+import expenseTable from './expense-table'
 import { SORT_EXPENSE_TABLE } from '../actions'
 
 describe('expenseTable reducer', () => {
