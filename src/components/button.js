@@ -25,7 +25,7 @@ const Button = styled.button`
   `}
 `
 
-export const Link = styled(RouterLink)`
+export const ButtonLink = styled(RouterLink)`
   border-radius: 3px;
   padding: 0.25em 1em;
   background: transparent;

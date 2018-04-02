@@ -1,13 +1,13 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container, Spacer } from '../components/layout'
-import { Link } from '../components/button'
+import { ButtonLink } from '../components/button'
 import ExpenseTable from './expense-table'
 
 const ExpenseIndexPage = () => (
   <Container>
     <Spacer />
-    <Link to="add-expense">+ Add Expense</Link>
+    <ButtonLink to="add-expense">+ Add Expense</ButtonLink>
     <Spacer />
     <ExpenseTable />
   </Container>

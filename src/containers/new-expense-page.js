@@ -2,12 +2,12 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import ExpenseForm from './expense-form'
 import { Container, Spacer } from '../components/layout'
-import { Link } from '../components/button'
+import { ButtonLink } from '../components/button'
 
 const NewExpensePage = () => (
   <Container>
     <Spacer />
-    <Link to="/expenses">Back</Link>
+    <ButtonLink to="/expenses">Back</ButtonLink>
     <Spacer />
     <ExpenseForm />
   </Container>
