@@ -7,34 +7,42 @@ import { Container, Spacer } from '../components/layout'
 import { ButtonLink } from '../components/button'
 import ExpenseTable from './expense-table'
 import { sortExpenseTable, resetExpenseTable } from '../actions'
+import { listExpenses } from '../actions/expenses'
 
-const ExpenseIndexPage = ({
-  expenses,
-  onSort,
-  resetExpenseTable,
-  sortKey,
-  sortOrder
-}) => (
-  <Container>
-    <Spacer />
-    <ButtonLink to="add-expense">+ Add Expense</ButtonLink>
-    <Spacer />
-    <ExpenseTable
-      expenses={expenses}
-      onSort={onSort}
-      resetTable={resetExpenseTable}
-      sortKey={sortKey}
-      sortOrder={sortOrder}
-    />
-  </Container>
-)
+class ExpenseIndexPage extends React.Component {
+  static propTypes = {
+    expenses: PropTypes.instanceOf(List).isRequired,
+    listExpenses: PropTypes.func.isRequired,
+    onSort: PropTypes.func.isRequired,
+    resetExpenseTable: PropTypes.func.isRequired,
+    sortKey: PropTypes.string.isRequired,
+    sortOrder: PropTypes.string.isRequired
+  }
 
-ExpenseIndexPage.propTypes = {
-  expenses: PropTypes.instanceOf(List).isRequired,
-  onSort: PropTypes.func.isRequired,
-  resetExpenseTable: PropTypes.func.isRequired,
-  sortKey: PropTypes.string.isRequired,
-  sortOrder: PropTypes.string.isRequired
+  componentDidMount () {
+    if (this.props.expenses.size < 1) {
+      this.props.listExpenses()
+    }
+  }
+
+  render () {
+    const { expenses, onSort, resetTable, sortKey, sortOrder } = this.props
+
+    return (
+      <Container>
+        <Spacer />
+        <ButtonLink to="add-expense">+ Add Expense</ButtonLink>
+        <Spacer />
+        <ExpenseTable
+          expenses={expenses}
+          onSort={onSort}
+          resetTable={resetExpenseTable}
+          sortKey={sortKey}
+          sortOrder={sortOrder}
+        />
+      </Container>
+    )
+  }
 }
 
 const mapStateToProps = (state, ownProps) => ({
@@ -45,7 +53,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSort: (columnName) => dispatch(sortExpenseTable(columnName)),
-  resetExpenseTable: () => dispatch(resetExpenseTable())
+  resetExpenseTable: () => dispatch(resetExpenseTable()),
+  listExpenses: () => dispatch(listExpenses())
 })
 
 export default withRouter(
