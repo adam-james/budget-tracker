@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import { Field } from 'redux-form'
 import { colors, font } from './theme'
@@ -59,12 +60,13 @@ export const FormTitle = styled.h3`
   font-weight: 400;
 `
 
-export const Submit = Button.extend.attrs({
-  children: 'Submit',
-  primary: true
+export const Submit = styled(function ({ className }) {
+  return (
+    <Button className={className} primary>Submit</Button>
+  )
 })`
-  padding: 0.5em 4em;
-  margin: 0 auto;
-  margin-right: 0%;
-  display: block;
+padding: 0.5em 4em;
+margin: 0 auto;
+margin-right: 0%;
+display: block;
 `

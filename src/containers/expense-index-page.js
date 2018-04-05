@@ -26,7 +26,13 @@ class ExpenseIndexPage extends React.Component {
   }
 
   render () {
-    const { expenses, onSort, resetTable, sortKey, sortOrder } = this.props
+    const {
+      expenses,
+      onSort,
+      resetExpenseTable,
+      sortKey,
+      sortOrder
+    } = this.props
 
     return (
       <Container>
